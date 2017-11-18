@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/acambas/lambda-api-factory.svg?style=svg)](https://circleci.com/gh/acambas/lambda-api-factory)
+
 # Lambda API factory
 
 This is a small library that helps in reducing boilerplate and creating conventions with creating aws lambda HTTP API:
