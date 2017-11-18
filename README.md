@@ -93,7 +93,7 @@ const service = async (event, context) => {
   }
 }
 
-module.exports.basicApi = lambdaFactory(service)
+module.exports.basicApi = lambdaFactory(service, validate)
 ```
 
 Example with validation that return validation result
@@ -113,7 +113,7 @@ const service = async (event, context) => {
   }
 }
 
-module.exports.basicApi = lambdaFactory(service)
+module.exports.basicApi = lambdaFactory(service, validate)
 ```
 
 ## Notes
