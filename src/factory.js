@@ -11,7 +11,7 @@ const factory = (service, validate) => {
     try {
       if (validate) {
         try {
-          const errors = await validate(event)
+          const errors = await validate(event, context)
           if (errors) {
             const error = new Error(
               `Validation error: 
