@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/lambda-api-factory
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - save_cache:
+          key: v1-repo-{{ checksum ".circle-sha" }}
+          paths:
+            - ~/lambda-api-factory
+
+  test:
+    working_directory: ~/lambda-api-factory
+    docker:
+      - image: circleci/node:8
+    steps:
+      - run:  
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+          keys:
+            - v1-repo-{{ checksum ".circle-sha" }}
+      - run:
+          name: Test
+          command: npm test
+ 
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+              - build

@@ -1,0 +1,38 @@
+{
+  "name": "lambda-api-factory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "test": "jest src/ --coverage --verbose",
+    "build": "cross-env NODE_ENV=production babel --out-dir build --ignore __tests__ --copy-files src/",
+    "lint": "eslint src/"
+  },
+  "author": "acambas",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-jest": "^21.2.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "jest": "^21.2.1",
+    "prettier": "^1.8.2",
+    "prettier-standard": "^7.0.3"
+  }
+}

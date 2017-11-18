@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test api service with validation that returns error object 1`] = `
+Array [
+  Array [
+    null,
+    Object {
+      "body": "\\"Validation error: \\\\n              {\\\\n  \\\\\\"msg\\\\\\": \\\\\\"some value is wrong :)\\\\\\"\\\\n}\\"",
+      "headers": Object {
+        "Content-Type": "application/json",
+      },
+      "statusCode": 400,
+    },
+  ],
+]
+`;
