@@ -124,7 +124,6 @@ Some of the benefits of using this library
 - easier testing (handler was split into smaller pieces)
 
 
-
 It was built using:
 - eslint for linting
 - prettier for code reformating 
