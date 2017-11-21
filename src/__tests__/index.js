@@ -19,6 +19,61 @@ test('test simple api service', async () => {
   ])
 })
 
+test('test simple api service with body', async () => {
+  const service = async () => {
+    return 5
+  }
+  const handler = apiFactory(service)
+  const callback = jest.fn()
+  await handler(
+    {
+      queryStringParameters: {},
+      pathParameters: {},
+      body: JSON.stringify({ test: 'test value' }),
+      headers: { 'Content-Type': 'application/json' },
+    },
+    {},
+    callback
+  )
+  expect(callback.mock.calls).toEqual([
+    [
+      null,
+      {
+        body: '5',
+        headers: { 'Content-Type': 'application/json' },
+        statusCode: 200,
+      },
+    ],
+  ])
+})
+
+test('it should fail because body is in wrong format', async () => {
+  const service = async () => {
+    return 5
+  }
+  const handler = apiFactory(service)
+  const callback = jest.fn()
+  await handler(
+    {
+      body: '{',
+      headers: { 'Content-Type': 'application/json' },
+    },
+    {},
+    callback
+  )
+  expect(callback.mock.calls).toEqual([
+    [
+      null,
+      {
+        body:
+          '"There was an issue with request body, it cant be parsed into valid JSON"',
+        headers: { 'Content-Type': 'application/json' },
+        statusCode: 400,
+      },
+    ],
+  ])
+})
+
 test('test simple api service that returns empty result', async () => {
   const service = async () => {
     return
