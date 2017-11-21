@@ -9,19 +9,25 @@ const factory = (service, validate) => {
   return async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false
     try {
-      if(!event.queryStringParameters) {
+      if (!event.queryStringParameters) {
         event.queryStringParameters = {}
       }
-      if(!event.pathParameters) {
+      if (!event.pathParameters) {
         event.pathParameters = {}
       }
-      if(event && event.headers && event.headers['Content-Type'] === 'application/json') {
+      if (
+        event &&
+        event.headers &&
+        event.headers['Content-Type'] === 'application/json'
+      ) {
         try {
           event.body = JSON.parse(event.body)
         } catch (err) {
-          const error = new Error('There was an issue with request body, it cant be parsed into valid JSON');
+          const error = new Error(
+            'There was an issue with request body, it cant be parsed into valid JSON'
+          )
           error.statusCode = 400
-          throw error;
+          throw error
         }
       }
       if (validate) {
