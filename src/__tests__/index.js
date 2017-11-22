@@ -66,7 +66,7 @@ test('it should fail because body is in wrong format', async () => {
       null,
       {
         body:
-          '"There was an issue with request body, it cant be parsed into valid JSON"',
+          '{"message":"There was an issue with request body, it cant be parsed into valid JSON"}',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },
@@ -146,7 +146,7 @@ test('test api service with validation that throws exception', async () => {
     [
       null,
       {
-        body: '"validation issues"',
+        body: '{"message":"validation issues"}',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },
@@ -168,7 +168,7 @@ test('test api service with validation that throws exception', async () => {
     [
       null,
       {
-        body: '"validation issues"',
+        body: '{"message":"validation issues"}',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },

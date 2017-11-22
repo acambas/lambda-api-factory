@@ -34,7 +34,7 @@ test('return not found response', () => {
 test('return error response', () => {
   const res = createErrorResponse()
   expect(res).toEqual({
-    body: '"Server error"',
+    body: '{"message":"Server error"}',
     headers: { 'Content-Type': 'application/json' },
     statusCode: 500,
   })
@@ -45,7 +45,7 @@ test('return error response with custom message and status code', () => {
   error.statusCode = 401
   const res = createErrorResponse(error)
   expect(res).toEqual({
-    body: '"test error"',
+    body: '{"message":"test error"}',
     headers: { 'Content-Type': 'application/json' },
     statusCode: 401,
   })
