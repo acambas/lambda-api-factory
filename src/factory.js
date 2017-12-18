@@ -8,6 +8,7 @@ import isResultEmpty from './isResultEmpty'
 const factory = (service, validate) => {
   return async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false
+    let newEvent = event
     try {
       if (!event.queryStringParameters) {
         event.queryStringParameters = {}
@@ -21,7 +22,7 @@ const factory = (service, validate) => {
         event.headers['Content-Type'] === 'application/json'
       ) {
         try {
-          event.body = JSON.parse(event.body)
+          newEvent = { ...event, body: JSON.parse(event.body) }
         } catch (err) {
           const error = new Error(
             'There was an issue with request body, it cant be parsed into valid JSON'
@@ -32,7 +33,7 @@ const factory = (service, validate) => {
       }
       if (validate) {
         try {
-          const errors = await validate(event, context)
+          const errors = await validate(newEvent, context)
           if (errors) {
             const error = new Error(
               `Validation error: 
@@ -46,7 +47,7 @@ const factory = (service, validate) => {
           throw error
         }
       }
-      const result = await service(event, context)
+      const result = await service(newEvent, context)
       if (!isResultEmpty(result)) {
         callback(null, createSuccessResponse(result))
       } else {
