@@ -5,7 +5,11 @@ import {
 } from './apiResponseWrapper'
 import isResultEmpty from './isResultEmpty'
 
-const factory = (service, validate) => {
+const factory = (
+  service,
+  validate,
+  changeHttpResponse = (event, resp) => resp
+) => {
   return async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false
     let newEvent = event
@@ -49,12 +53,12 @@ const factory = (service, validate) => {
       }
       const result = await service(newEvent, context)
       if (!isResultEmpty(result)) {
-        callback(null, createSuccessResponse(result))
+        callback(null, changeHttpResponse(event, createSuccessResponse(result)))
       } else {
-        callback(null, createNotFoundResponse())
+        callback(null, changeHttpResponse(event, createNotFoundResponse()))
       }
     } catch (error) {
-      callback(null, createErrorResponse(error))
+      callback(null, changeHttpResponse(event, createErrorResponse(error)))
     }
   }
 }

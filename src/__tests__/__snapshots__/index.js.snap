@@ -5,7 +5,7 @@ Array [
   Array [
     null,
     Object {
-      "body": "{\\"message\\":\\"Validation error: \\\\n              {\\\\n  \\\\\\"msg\\\\\\": \\\\\\"some value is wrong :)\\\\\\"\\\\n}\\"}",
+      "body": "\\"Validation error: \\\\n              {\\\\n  \\\\\\"msg\\\\\\": \\\\\\"some value is wrong :)\\\\\\"\\\\n}\\"",
       "headers": Object {
         "Content-Type": "application/json",
       },

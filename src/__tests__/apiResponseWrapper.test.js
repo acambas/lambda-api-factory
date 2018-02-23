@@ -25,7 +25,7 @@ test('return success response for array', () => {
 test('return not found response', () => {
   const res = createNotFoundResponse()
   expect(res).toEqual({
-    body: '{"message":"Resource not found"}',
+    body: 'Resource not found',
     headers: { 'Content-Type': 'application/json' },
     statusCode: 404,
   })
@@ -34,7 +34,7 @@ test('return not found response', () => {
 test('return error response', () => {
   const res = createErrorResponse()
   expect(res).toEqual({
-    body: '{"message":"Server error"}',
+    body: '"Server error"',
     headers: { 'Content-Type': 'application/json' },
     statusCode: 500,
   })
@@ -45,7 +45,7 @@ test('return error response with custom message and status code', () => {
   error.statusCode = 401
   const res = createErrorResponse(error)
   expect(res).toEqual({
-    body: '{"message":"test error"}',
+    body: '"test error"',
     headers: { 'Content-Type': 'application/json' },
     statusCode: 401,
   })

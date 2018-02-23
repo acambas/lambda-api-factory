@@ -16,9 +16,7 @@ export const createErrorResponse = err => ({
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(
-    err && err.statusCode && err.message
-      ? { message: err.message }
-      : { message: 'Server error' }
+    err && err.statusCode && err.message ? err.message : 'Server error'
   ),
 })
 
@@ -27,7 +25,5 @@ export const createNotFoundResponse = () => ({
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-    message: 'Resource not found',
-  }),
+  body: 'Resource not found',
 })

@@ -19,6 +19,32 @@ test('test simple api service', async () => {
   ])
 })
 
+test('test simple api service', async () => {
+  const service = async () => {
+    return 5
+  }
+  const handler = apiFactory(service, undefined, (event, response) => {
+    return {
+      ...response,
+      headers: {
+        test: event.test,
+      },
+    }
+  })
+  const callback = jest.fn()
+  await handler({ test: 'test value' }, {}, callback)
+  expect(callback.mock.calls).toEqual([
+    [
+      null,
+      {
+        body: '5',
+        headers: { test: 'test value' },
+        statusCode: 200,
+      },
+    ],
+  ])
+})
+
 test('test simple api service with body', async () => {
   const service = async () => {
     return 5
@@ -66,7 +92,7 @@ test('it should fail because body is in wrong format', async () => {
       null,
       {
         body:
-          '{"message":"There was an issue with request body, it cant be parsed into valid JSON"}',
+          '"There was an issue with request body, it cant be parsed into valid JSON"',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },
@@ -85,7 +111,7 @@ test('test simple api service that returns empty result', async () => {
     [
       null,
       {
-        body: '{"message":"Resource not found"}',
+        body: 'Resource not found',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 404,
       },
@@ -146,7 +172,7 @@ test('test api service with validation that throws exception', async () => {
     [
       null,
       {
-        body: '{"message":"validation issues"}',
+        body: '"validation issues"',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },
@@ -168,7 +194,7 @@ test('test api service with validation that throws exception', async () => {
     [
       null,
       {
-        body: '{"message":"validation issues"}',
+        body: '"validation issues"',
         headers: { 'Content-Type': 'application/json' },
         statusCode: 400,
       },
