@@ -8,7 +8,7 @@ import isResultEmpty from './isResultEmpty'
 const factory = (
   service,
   validate,
-  changeHttpResponse = (event, resp) => resp
+  changeHttpResponse = async (event, resp) => resp
 ) => {
   return async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false
@@ -53,12 +53,15 @@ const factory = (
       }
       const result = await service(newEvent, context)
       if (!isResultEmpty(result)) {
-        callback(null, changeHttpResponse(event, createSuccessResponse(result)))
+        callback(
+          null,
+          await changeHttpResponse(event, createSuccessResponse(result))
+        )
       } else {
-        callback(null, changeHttpResponse(event, createNotFoundResponse()))
+        callback(null, createNotFoundResponse())
       }
     } catch (error) {
-      callback(null, changeHttpResponse(event, createErrorResponse(error)))
+      callback(null, createErrorResponse(error))
     }
   }
 }
