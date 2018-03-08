@@ -5,10 +5,19 @@ import {
 } from '../apiResponseWrapper'
 
 test('return success response for object', () => {
+  const res = createSuccessResponse({ test: 'test' })
+  expect(res).toEqual({
+    body: JSON.stringify({ test: 'test' }),
+    headers: { 'Content-Type': 'application/json' },
+    statusCode: 200,
+  })
+})
+
+test('return success response for string', () => {
   const res = createSuccessResponse('test')
   expect(res).toEqual({
-    body: '"test"',
-    headers: { 'Content-Type': 'application/json' },
+    body: 'test',
+    headers: { 'Content-Type': 'text/plain' },
     statusCode: 200,
   })
 })

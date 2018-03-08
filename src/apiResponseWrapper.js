@@ -1,10 +1,11 @@
 export const createSuccessResponse = data => ({
   statusCode: 200,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type':
+      typeof data === 'string' ? 'text/plain' : 'application/json',
   },
   body: !Array.isArray(data)
-    ? JSON.stringify(data)
+    ? typeof data === 'string' ? data : JSON.stringify(data)
     : JSON.stringify({
         data,
       }),
