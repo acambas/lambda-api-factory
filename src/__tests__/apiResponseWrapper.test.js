@@ -34,7 +34,7 @@ test('return success response for array', () => {
 test('return not found response', () => {
   const res = createNotFoundResponse()
   expect(res).toEqual({
-    body: 'Resource not found',
+    body: { message: 'Resource not found'},
     headers: { 'Content-Type': 'application/json' },
     statusCode: 404,
   })
