@@ -111,7 +111,7 @@ test('test simple api service that returns empty result', async () => {
     [
       null,
       {
-        body: 'Resource not found',
+        body: { message: 'Resource not found' },
         headers: { 'Content-Type': 'application/json' },
         statusCode: 404,
       },
