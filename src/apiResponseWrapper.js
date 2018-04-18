@@ -26,7 +26,7 @@ export const createNotFoundResponse = () => ({
   headers: {
     'Content-Type': 'application/json',
   },
-  body: {
+  body: JSON.stringify({
     message: 'Resource not found',
-  },
+  }),
 })
